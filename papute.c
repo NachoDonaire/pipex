@@ -2,28 +2,22 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
+#include <limits.h>
+#include "pipexlib.h"
 
 int	lens(char *s);
+char	*join_bin(char *s);
 
-void	execute(char *str)
+void	execute(char *str, char * const env[])
 {
-	char **flags;
-	char * const s[];
-	char * const s2[];
-	int i;
+  char *com;
+    char **spliteao;
 
-	s = (char **)malloc(sizeof(char *) * lens(str));
-	s2 = (char **)malloc(sizeof(char *) * lens(str));
-	i = 1;
-	s2 = NULL;
-	flags = ft_split(str, ' ');
-	while (flags[i])
-	{
-		s[i] = flags[i];
-		i++;
-	}
-	flags[i] = NULL;
-	execve(flags[0], s, s2);
+	spliteao = ft_split(str, ' ');
+    printf("%s", spliteao[0]);
+    com = join_bin(spliteao[0]);
+	char *const flags[2] = {spliteao[0], spliteao[1], NULL};
+	execve(com, flags, env);
 }
 int	lens(char *s)
 {
@@ -42,7 +36,7 @@ char	*join_bin(char *s)
 	char *sol;
 	int z;
 
-	b = "/usr/bin/";
+	b = "/bin/";
 	sol = malloc((lens(s) + lens(b) + 1) * sizeof(char));
 	i = 0;
 	z = 0;
@@ -55,7 +49,7 @@ char	*join_bin(char *s)
 	return (sol);
 }
 
-int main(int arg, char *args[])
+int main(int arg, char *args[], char * const env[])
 {
 	if (arg > 10)
 		return (0);
@@ -65,14 +59,12 @@ int main(int arg, char *args[])
 	//char **flags;
 	//flags = ft_split(args[2]);
 	//char * const s[1];
-	char * const s2[] = {NULL, NULL};
-	char *com1;
-	char *com2;
+	//char * const s2[] = {"hola!", NULL};
+	//char *com1;
+	//char *com2;
 
 	//char buff[200];
 	//int lec;
-	com1 = malloc((lens(args[2]) + 10) * sizeof(char));
-	com2 = malloc((lens(args[3]) + 10) * sizeof(char));
 	pipe(fd);
 	pid = fork();
 
@@ -82,9 +74,10 @@ int main(int arg, char *args[])
 		close(fd[0]);
 		//write(fd[1], "hoola", 5);
 		dup2(fd[1], 1);
-		com1 = join_bin(args[2]);
+		//com1 = join_bin(args[2]);
 		//close(fd[1]);
-		execute(args[2]);
+		execute(args[2], env);
+        //execve(args[2], s2, env);
 	}
 	else
 	{
@@ -97,8 +90,9 @@ int main(int arg, char *args[])
 		//lec = read(fd[0], buff, sizeof(buff));
 		//printf("lec: %d; buff: %s", lec, buff);
 		dup2(fd2, 1);
-		com2 = join_bin(args[3]);
-		execve(args[3], s2, s2);
+		//com2 = join_bin(args[3]);
+		//execve(args[3], s2, env);
+        execute(args[3], env);
 	}
 	return (0);
 }
