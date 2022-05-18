@@ -5,9 +5,13 @@
 
 int main()
 {
-	char * const s[] = {"holaa", NULL};
-	char * const s2[] = {"holaa", NULL};
-
-	execve("/bin/ls", s, s2);
-	return (0);
+	char **flags;
+	char *com;
+	flags = malloc(sizeof(char *) * 9);
+   flags[0] = "ls";
+	flags[1] = "-a";
+	flags[2] = NULL;
+	com = "/bin/ls";
+	char * const env[] = {"hola", NULL};
+ execve(com, flags, env);
 }
