@@ -15,6 +15,7 @@ int	create_file(char *s, char * const env[])
 		execve("/usr/bin/touch", file, env);
 	else
 	{
+		wait(NULL);
 		fd = open(s, O_WRONLY);
 		return (fd);
 	}
