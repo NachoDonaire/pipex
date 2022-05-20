@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   papute_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/20 10:44:20 by ndonaire          #+#    #+#             */
+/*   Updated: 2022/05/20 10:51:09 by ndonaire         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -29,8 +41,8 @@ char	*join_path(char *sol, char *args)
 
 int	checkin_path(char *s, char *find)
 {
-	int i; 
-	int y;
+	int	i;
+	int	y;
 
 	y = 0;
 	i = 0;
@@ -92,7 +104,6 @@ void	execute_a(char *str, char	*const env[], char *args)
 		perror("command not found");
 		exit(-1);
 	}
-	
 }
 
 void	execute_b(char *str, char *const env[])
@@ -119,73 +130,3 @@ void	execute_b(char *str, char *const env[])
 		exit(-1);
 	}
 }
-
-char	*find_path(char *const env[])
-{
-	int	i;
-	int	check;
-	char *sol;
-
-	i = 0;
-	check = checkin_path(env[i], "PATH");
-	while (check == 0)
-	{
-		i++;
-		check = checkin_path(env[i], "PATH");
-	}
-	sol = env[i];
-	return (env[i]);
-}
-
-char	*pseudo_join(char *path, char *com)
-{
-	char *sol;
-	int i;
-	int y;
-
-	y = 0;
-	i = 0;
-	sol = malloc(sizeof(char) * (lens(path) + lens(com) + 1));
-	while (path[i])
-	{
-		sol[i] = path[i];
-		i++;
-	}
-	sol[i++] = '/';
-	while (com[y])
-	{
-		sol[i++] = com[y++];
-	}
-	sol[i] = '\0';
-	return (sol);
-}
-
-char	*split_path(char *env, char *arg)
-{
-	int		i;
-	char	**first;
-	char	**sol;
-
-	i = 0;
-	first = ft_split(env, '=');
-	sol = ft_split(first[1], ':');
-	//printf("\n%s\n", sol);
-	while (access(pseudo_join(sol[i], arg) , F_OK) < 0)
-		i++;
-	return (sol[i]);
-}
-/*
-int main(int arg, char **args, char * const env[])
-{
-	if (args[0][0] == '0')
-		return (0);
-	if (arg != 1)
-		return (0);
-	char *s;
-
-	s = find_path(env);
-	printf("%s", s);
-	return (0);
-}
-*/
-
