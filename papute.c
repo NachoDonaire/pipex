@@ -80,7 +80,11 @@ int	main(int arg, char *args[], char *const env[])
 	int		fd_in;
 
 	if (arg != 5)
+	{
+		printf("naa");
 		return (0);
+	}
+	printf("haces algo?");
 	pipe(fd);
 	fd_in = open(args[1], O_RDONLY);
 	if (fd_in < 0)
@@ -92,9 +96,12 @@ int	main(int arg, char *args[], char *const env[])
 		if (fd_in > 0)
 			dup2(fd_in, 0);
 		dup2(fd[1], 1);
+		printf("ejecucion_a");
 		execute_a(args[2], env, args[1]);
 	}
 	else
+	{
 		father(args, fd, env);
+	}
 	return (0);
 }

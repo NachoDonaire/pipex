@@ -16,6 +16,8 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 char	**ft_split(char const *s, char c);
 void	*ft_calloc(size_t nmemb, size_t size);
@@ -35,5 +37,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_strlen(const char *s);
 int		checkin_path(char *s, char *find);
 void	father(char *args[], int fd[2], char *const env[]);
+char    *find_pwd(char *const env[]);
+char    *join_pwd(char *env, char *com);
 
 #endif

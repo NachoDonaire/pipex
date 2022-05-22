@@ -16,7 +16,7 @@
 #include <stdio.h>
 
 char	**ft_split(char const *s, char c);
-
+/*
 int	create_file(char *s, char *const env[])
 {
 	int			fd;
@@ -35,7 +35,7 @@ int	create_file(char *s, char *const env[])
 	}
 	return (fd);
 }
-
+*/
 void	father(char *args[], int fd[2], char *const env[])
 {
 	int	pid;
@@ -45,7 +45,7 @@ void	father(char *args[], int fd[2], char *const env[])
 	fd2 = 0;
 	if (pid == 0)
 	{
-		fd2 = open(args[4], O_WRONLY | O_CREAT | O_TRUNC | O_APPEND | S_IRWXU);
+		fd2 = open(args[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd2 < 0)
 			perror("Can´t open outfile");
 		close(fd[1]);
@@ -65,7 +65,6 @@ char	*find_path(char *const env[])
 {
 	int		i;
 	int		check;
-	char	*sol;
 
 	i = 0;
 	check = checkin_path(env[i], "PATH");
@@ -74,7 +73,6 @@ char	*find_path(char *const env[])
 		i++;
 		check = checkin_path(env[i], "PATH");
 	}
-	sol = env[i];
 	return (env[i]);
 }
 

@@ -60,14 +60,14 @@ int	checkin_path(char *s, char *find)
 	}
 	return (0);
 }
-
+/*
 void	join_file(char *s[], char *args, int i)
 {
-	char	*file;
+	//char		*file;
 	int		y;
 
 	y = 0;
-	file = malloc(sizeof(char) * (lens(args) + 1));
+	//file = malloc(sizeof(char) * (lens(args) + 1));
 	while (args[y])
 	{
 		s[i][y] = args[y];
@@ -76,7 +76,7 @@ void	join_file(char *s[], char *args, int i)
 	s[i++][y] = '\0';
 	s[i] = NULL;
 }
-
+*/
 void	execute_a(char *str, char	*const env[], char *args)
 {
 	char	*com;
@@ -87,18 +87,30 @@ void	execute_a(char *str, char	*const env[], char *args)
 
 	i = 0;
 	spliteao = ft_split(str, ' ');
-	if (str[0] != '/')
+	if (str[0] != '/' && str[0] != '.')
 	{
 		help = find_path(env);
 		b = split_path(help, spliteao[0]);
 		com = join_path(b, spliteao[0]);
 	}
-	else
+	else if (str[0] == '.')
+	{
+		//help = find_pwd(env);
+		//com = join_pwd(help, spliteao[0]);
+		com = spliteao[0];
+	}
+	else if (str[0] == '/')
 		com = spliteao[0];
 	while (spliteao[i])
 		i++;
 	if (!args)
 		return ;
+	i = 0;
+	while (com[i])
+	{
+		write(1, &com[i++], 1);
+	}
+
 	if (execve(com, spliteao, env) == -1)
 	{
 		perror("command not found");
@@ -110,19 +122,23 @@ void	execute_b(char *str, char *const env[])
 {
 	char	*com;
 	char	**spliteao;
-	int		i;
 	char	*b;
 	char	*help;
 
-	i = 0;
 	spliteao = ft_split(str, ' ');
-	if (str[0] != '/')
+	if (str[0] != '/' && str[0] != '.')
 	{
 		help = find_path(env);
 		b = split_path(help, spliteao[0]);
 		com = join_path(b, spliteao[0]);
 	}
-	else
+	else if (str[0] == '.')
+	{
+		//help = find_pwd(env);
+		//com = join_pwd(help, spliteao[0]);
+		com = spliteao[0];
+	}
+	else if (str[0] == '/')
 		com = spliteao[0];
 	if (execve(com, spliteao, env) == -1)
 	{
