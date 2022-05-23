@@ -1,5 +1,5 @@
-SRCS	=	papute.c ft_split.c ft_calloc.c ft_memcpy.c \
-			create_file.c papute_utils.c ft_strnstr.c ft_strlen.c \
+SRCS	=	pipex.c ft_split.c ft_calloc.c ft_memcpy.c \
+			create_file.c pipex_utils.c ft_strnstr.c ft_strlen.c \
 			gestor_ex.c
 OBJS	=	${SRCS:.c=.c}
 NAME	=	pipex

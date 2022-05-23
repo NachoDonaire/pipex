@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gestor_ex.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/23 10:17:11 by ndonaire          #+#    #+#             */
+/*   Updated: 2022/05/23 10:17:38 by ndonaire         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipexlib.h"
 
 char	*find_pwd(char *const env[])
@@ -17,10 +29,10 @@ char	*find_pwd(char *const env[])
 
 char	*join_pwd(char *env, char *com)
 {
-	int	i;
+	int		i;
 	char	**spliteo;
 	char	**path;
-	int	y;
+	int		y;
 	char	*sol;
 
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 10:44:20 by ndonaire          #+#    #+#             */
-/*   Updated: 2022/05/20 10:51:09 by ndonaire         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:27:54 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	checkin_path(char *s, char *find)
 	}
 	return (0);
 }
+
 /*
 void	join_file(char *s[], char *args, int i)
 {
@@ -82,10 +83,8 @@ void	execute_a(char *str, char	*const env[], char *args)
 	char	*com;
 	char	**spliteao;
 	char	*help;
-	int		i;
 	char	*b;
 
-	i = 0;
 	spliteao = ft_split(str, ' ');
 	if (str[0] != '/' && str[0] != '.')
 	{
@@ -94,23 +93,11 @@ void	execute_a(char *str, char	*const env[], char *args)
 		com = join_path(b, spliteao[0]);
 	}
 	else if (str[0] == '.')
-	{
-		//help = find_pwd(env);
-		//com = join_pwd(help, spliteao[0]);
 		com = spliteao[0];
-	}
 	else if (str[0] == '/')
 		com = spliteao[0];
-	while (spliteao[i])
-		i++;
 	if (!args)
 		return ;
-	i = 0;
-	while (com[i])
-	{
-		write(1, &com[i++], 1);
-	}
-
 	if (execve(com, spliteao, env) == -1)
 	{
 		perror("command not found");
@@ -133,11 +120,7 @@ void	execute_b(char *str, char *const env[])
 		com = join_path(b, spliteao[0]);
 	}
 	else if (str[0] == '.')
-	{
-		//help = find_pwd(env);
-		//com = join_pwd(help, spliteao[0]);
 		com = spliteao[0];
-	}
 	else if (str[0] == '/')
 		com = spliteao[0];
 	if (execve(com, spliteao, env) == -1)

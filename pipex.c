@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:54:43 by ndonaire          #+#    #+#             */
-/*   Updated: 2022/05/20 11:00:06 by ndonaire         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:32:33 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,7 @@ int	main(int arg, char *args[], char *const env[])
 	int		fd_in;
 
 	if (arg != 5)
-	{
-		printf("naa");
 		return (0);
-	}
-	printf("haces algo?");
 	pipe(fd);
 	fd_in = open(args[1], O_RDONLY);
 	if (fd_in < 0)
@@ -100,8 +96,6 @@ int	main(int arg, char *args[], char *const env[])
 		execute_a(args[2], env, args[1]);
 	}
 	else
-	{
-		father(args, fd, env);
-	}
+		father(args, fd, env, fd_in);
 	return (0);
 }

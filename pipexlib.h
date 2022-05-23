@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 10:52:50 by ndonaire          #+#    #+#             */
-/*   Updated: 2022/05/20 10:54:13 by ndonaire         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:19:11 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ char	*join_path(char *sol, char *args);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_strlen(const char *s);
 int		checkin_path(char *s, char *find);
-void	father(char *args[], int fd[2], char *const env[]);
-char    *find_pwd(char *const env[]);
-char    *join_pwd(char *env, char *com);
+void	father(char *args[], int fd[2], char *const env[], int fd_in);
+char	*find_pwd(char *const env[]);
+char	*join_pwd(char *env, char *com);
 
 #endif

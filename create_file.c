@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 10:47:56 by ndonaire          #+#    #+#             */
-/*   Updated: 2022/05/20 10:51:18 by ndonaire         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:27:06 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	create_file(char *s, char *const env[])
 	return (fd);
 }
 */
-void	father(char *args[], int fd[2], char *const env[])
+
+void	father(char *args[], int fd[2], char *const env[], int fd_in)
 {
 	int	pid;
 	int	fd2;
@@ -57,6 +58,8 @@ void	father(char *args[], int fd[2], char *const env[])
 	else
 	{
 		wait (NULL);
+		close(fd_in);
+		close(fd2);
 		return ;
 	}
 }
