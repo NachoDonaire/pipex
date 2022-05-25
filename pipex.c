@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:54:43 by ndonaire          #+#    #+#             */
-/*   Updated: 2022/05/23 10:32:33 by ndonaire         ###   ########.fr       */
+/*   Updated: 2022/05/25 10:29:50 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ int	main(int arg, char *args[], char *const env[])
 	}
 	else
 		father(args, fd, env, fd_in);
+	system("leaks pipex");
 	return (0);
 }
