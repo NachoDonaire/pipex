@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 10:44:20 by ndonaire          #+#    #+#             */
-/*   Updated: 2022/05/25 10:26:18 by ndonaire         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:04:41 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	*join_path(char *sol, char *args)
 	int		y;
 	char	*res;
 
+	if (!sol || !args)
+		return (NULL);
 	res = malloc(sizeof(char) * (lens(sol) + lens(args) + 1));
 	i = 0;
 	y = 0;
@@ -86,15 +88,15 @@ void	execute_a(char *str, char	*const env[], char *args)
 	char	*b;
 
 	spliteao = ft_split(str, ' ');
-	if (str[0] != '/' && str[0] != '.')
+	if (checkin_path(str, ".") == 0 && checkin_path(str, "/") == 0)
 	{
 		help = find_path(env);
 		b = split_path(help, spliteao[0]);
 		com = join_path(b, spliteao[0]);
 	}
-	else if (str[0] == '.')
+	else if (checkin_path(str, ".") == 1)
 		com = spliteao[0];
-	else if (str[0] == '/')
+	else if (checkin_path(str, "/") == 1)
 		com = spliteao[0];
 	if (!args)
 		return ;
@@ -113,15 +115,15 @@ void	execute_b(char *str, char *const env[])
 	char	*help;
 
 	spliteao = ft_split(str, ' ');
-	if (str[0] != '/' && str[0] != '.')
+	if (checkin_path(str, ".") == 0 && checkin_path(str, "/") == 0)
 	{
 		help = find_path(env);
 		b = split_path(help, spliteao[0]);
 		com = join_path(b, spliteao[0]);
 	}
-	else if (str[0] == '.')
+	else if (checkin_path(str, ".") == 1)
 		com = spliteao[0];
-	else if (str[0] == '/')
+	else if (checkin_path(str, "/") == 1)
 		com = spliteao[0];
 	if (execve(com, spliteao, env) == -1)
 	{

@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:54:43 by ndonaire          #+#    #+#             */
-/*   Updated: 2022/05/25 10:29:50 by ndonaire         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:02:54 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,16 @@ int	main(int arg, char *args[], char *const env[])
 	if (fd_in < 0)
 		perror("Can`t open infile");
 	pid = fork();
+//	write(1, "hoola", 5);
 	if (pid == 0)
 	{
 		close(fd[0]);
 		if (fd_in > 0)
 			dup2(fd_in, 0);
 		dup2(fd[1], 1);
-		printf("ejecucion_a");
-		execute_a(args[2], env, args[1]);
+		execute_b(args[2], env);
 	}
 	else
 		father(args, fd, env, fd_in);
-	system("leaks pipex");
 	return (0);
 }

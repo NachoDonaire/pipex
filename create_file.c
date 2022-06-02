@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 10:47:56 by ndonaire          #+#    #+#             */
-/*   Updated: 2022/05/25 10:25:02 by ndonaire         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:04:36 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,11 @@ char	*pseudo_join(char *path, char *com)
 char	*split_path(char *env, char *arg)
 {
 	int		i;
-	char	**first;
 	char	**sol;
 
 	i = 0;
-	first = ft_split(env, '=');
-	sol = ft_split(first[1], ':');
-	while (access(pseudo_join(sol[i], arg), F_OK) < 0)
+	sol = ft_split(&env[5], ':');
+	while (sol[i] && access(pseudo_join(sol[i], arg), F_OK) < 0)
 		i++;
 	return (sol[i]);
 }
