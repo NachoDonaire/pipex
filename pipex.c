@@ -97,5 +97,6 @@ int	main(int arg, char *args[], char *const env[])
 	}
 	else
 		father(args, fd, env, fd_in);
+	system("leaks pipex");
 	return (0);
 }

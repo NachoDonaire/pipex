@@ -93,6 +93,7 @@ void	execute_a(char *str, char	*const env[], char *args)
 		help = find_path(env);
 		b = split_path(help, spliteao[0]);
 		com = join_path(b, spliteao[0]);
+	
 	}
 	else if (checkin_path(str, ".") == 1)
 		com = spliteao[0];
@@ -120,11 +121,14 @@ void	execute_b(char *str, char *const env[])
 		help = find_path(env);
 		b = split_path(help, spliteao[0]);
 		com = join_path(b, spliteao[0]);
+		//free(b);
+		//free(help);
 	}
 	else if (checkin_path(str, ".") == 1)
 		com = spliteao[0];
 	else if (checkin_path(str, "/") == 1)
 		com = spliteao[0];
+	while (1);
 	if (execve(com, spliteao, env) == -1)
 	{
 		perror("command not found");

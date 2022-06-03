@@ -106,10 +106,17 @@ char	*split_path(char *env, char *arg)
 {
 	int		i;
 	char	**sol;
+	int	res;
 
 	i = 0;
 	sol = ft_split(&env[5], ':');
 	while (sol[i] && access(pseudo_join(sol[i], arg), F_OK) < 0)
+	{
+		free(sol[i]);
 		i++;
-	return (sol[i]);
+	}
+	res = i;
+	while (sol[i])
+		free(sol[i++]);
+	return (sol[res]);
 }
