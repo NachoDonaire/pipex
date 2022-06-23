@@ -116,7 +116,10 @@ char	*split_path(char *env, char *arg)
 		i++;
 	}
 	res = i;
-	while (sol[i])
+	i++;
+/*	while (sol[i])
+	{
 		free(sol[i++]);
+	}*/
 	return (sol[res]);
 }
