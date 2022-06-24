@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 10:44:20 by ndonaire          #+#    #+#             */
-/*   Updated: 2022/06/02 18:04:41 by ndonaire         ###   ########.fr       */
+/*   Updated: 2022/06/24 12:52:37 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,23 +80,21 @@ void	join_file(char *s[], char *args, int i)
 	s[i] = NULL;
 }
 */
+/*
 void	execute_a(char *str, char	*const env[], char *args)
 {
 	char	*com;
 	char	**spliteao;
 	char	*help;
 	char	*b;
-	int	i;
 
 	spliteao = ft_split(str, ' ');
-	i = 0;
+
 	if (checkin_path(str, ".") == 0 && checkin_path(str, "/") == 0)
 	{
 		help = find_path(env);
 		b = split_path(help, spliteao[0]);
 		com = join_path(b, spliteao[0]);
-		while (com[i])
-			write(2, &com[i++], 1);
 	}
 	else if (checkin_path(str, ".") == 1)
 		com = spliteao[0];
@@ -110,29 +108,30 @@ void	execute_a(char *str, char	*const env[], char *args)
 		exit(-1);
 	}
 }
-
+*/
 void	execute_b(char *str, char *const env[])
 {
 	char	*com;
 	char	**spliteao;
-	char	*b;
-	char	*help;
+//	char	*b;
+	int		i;
 
 	spliteao = ft_split(str, ' ');
+	i = 0;
 	if (checkin_path(str, ".") == 0 && checkin_path(str, "/") == 0)
 	{
-		help = find_path(env);
-		b = split_path(help, spliteao[0]);
-		com = join_path(b, spliteao[0]);
-		if (b == NULL)
-			com = NULL;
+		com = split_path(&env[13][5], spliteao[0]);
+		//com = join_path(b, spliteao[0]);
 	}
 	if (checkin_path(str, ".") == 1)
 		com = spliteao[0];
 	if (checkin_path(str, "/") == 1)
 		com = spliteao[0];
+	free(com);
+	while(1);
 	if (execve(com, spliteao, env) == -1)
 	{
+		free(com);
 		perror("command not found");
 		exit(-1);
 	}

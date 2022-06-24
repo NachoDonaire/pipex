@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:54:43 by ndonaire          #+#    #+#             */
-/*   Updated: 2022/06/02 18:02:54 by ndonaire         ###   ########.fr       */
+/*   Updated: 2022/06/24 12:42:21 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	lens(char *s)
 		i++;
 	return (i);
 }
-
+/*
 char	*check_join(char *s)
 {
 	int		i;
@@ -72,7 +72,7 @@ char	*join_bin(char *s)
 	sol[i] = '\0';
 	return (sol);
 }
-
+*/
 int	main(int arg, char *args[], char *const env[])
 {
 	int		fd[2];
@@ -86,7 +86,6 @@ int	main(int arg, char *args[], char *const env[])
 	if (fd_in < 0)
 		perror("Can`t open infile");
 	pid = fork();
-//	write(1, "hoola", 5);
 	if (pid == 0)
 	{
 		close(fd[0]);

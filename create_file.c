@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 10:47:56 by ndonaire          #+#    #+#             */
-/*   Updated: 2022/06/02 18:04:36 by ndonaire         ###   ########.fr       */
+/*   Updated: 2022/06/24 12:52:39 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	father(char *args[], int fd[2], char *const env[], int fd_in)
 	}
 	else
 	{
-		wait (NULL);
+		wait(NULL);
 		close(fd_in);
 		close(fd2);
 		return ;
@@ -106,20 +106,35 @@ char	*split_path(char *env, char *arg)
 {
 	int		i;
 	char	**sol;
-	int	res;
+	//int		res;
+	int		auxy;
+	char	*k;
 
+	auxy = 0;
+	sol = ft_split(env, ':');
+	auxy = 0;
 	i = 0;
-	sol = ft_split(&env[5], ':');
-	while (sol[i] && access(pseudo_join(sol[i], arg), F_OK) < 0)
+	k = pseudo_join(sol[i], arg);
+	//k = ft_strjoin(
+	while (sol[auxy])
+		auxy++;
+	while (sol[i] && access(k, F_OK) < 0)
 	{
-		free(sol[i]);
+		//free(sol[i]);
+		free(k);
 		i++;
+		if (sol[i])
+			k = pseudo_join(sol[i], arg);
 	}
-	res = i;
-	i++;
-/*	while (sol[i])
-	{
+	//res = i;
+	i = 0;
+	while (sol[i])
 		free(sol[i++]);
-	}*/
-	return (sol[res]);
+	free(sol);
+	if (i >= auxy)
+	{
+		free(k);
+		return (NULL);
+	}
+	return (k);
 }
