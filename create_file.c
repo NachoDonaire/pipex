@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 10:47:56 by ndonaire          #+#    #+#             */
-/*   Updated: 2022/06/24 12:52:39 by ndonaire         ###   ########.fr       */
+/*   Updated: 2022/07/12 16:44:00 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	create_file(char *s, char *const env[])
 }
 */
 
-void	father(char *args[], int fd[2], char *const env[], int fd_in)
+int	father(char *args[], int fd[2], char *const env[], int fd_in)
 {
 	int	pid;
 	int	fd2;
@@ -48,7 +48,7 @@ void	father(char *args[], int fd[2], char *const env[], int fd_in)
 	{
 		fd2 = open(args[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd2 < 0)
-			perror("Can´t open outfile");
+			return (files_error(23));
 		close(fd[1]);
 		dup2(fd[0], 0);
 		close(fd[0]);
@@ -60,8 +60,9 @@ void	father(char *args[], int fd[2], char *const env[], int fd_in)
 		wait(NULL);
 		close(fd_in);
 		close(fd2);
-		return ;
+		return (1);
 	}
+	return (1);
 }
 
 char	*find_path(char *const env[])
@@ -106,7 +107,6 @@ char	*split_path(char *env, char *arg)
 {
 	int		i;
 	char	**sol;
-	//int		res;
 	int		auxy;
 	char	*k;
 
@@ -115,26 +115,14 @@ char	*split_path(char *env, char *arg)
 	auxy = 0;
 	i = 0;
 	k = pseudo_join(sol[i], arg);
-	//k = ft_strjoin(
 	while (sol[auxy])
 		auxy++;
 	while (sol[i] && access(k, F_OK) < 0)
 	{
-		//free(sol[i]);
 		free(k);
 		i++;
 		if (sol[i])
 			k = pseudo_join(sol[i], arg);
 	}
-	//res = i;
-	i = 0;
-	while (sol[i])
-		free(sol[i++]);
-	free(sol);
-	if (i >= auxy)
-	{
-		free(k);
-		return (NULL);
-	}
-	return (k);
+	return (freeear(sol, k));
 }

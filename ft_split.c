@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:40:12 by ndonaire          #+#    #+#             */
-/*   Updated: 2022/06/24 12:47:38 by ndonaire         ###   ########.fr       */
+/*   Updated: 2022/06/27 16:38:13 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	**reserva(const char *s, char c)
 {
 	char	**aux;
 
-	aux = malloc(sizeof(char **) * (ft_char_count(s, c) + 1));
+	aux = malloc(sizeof(char *) * (ft_char_count(s, c) + 1));
 	if (!aux)
 		return (NULL);
 	return (aux);

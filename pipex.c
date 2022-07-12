@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:54:43 by ndonaire          #+#    #+#             */
-/*   Updated: 2022/06/24 12:42:21 by ndonaire         ###   ########.fr       */
+/*   Updated: 2022/07/12 16:43:29 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,20 @@ int	lens(char *s)
 		i++;
 	return (i);
 }
+
+char	*freeear(char **sol, char *k)
+{
+	int	i;
+
+	i = 0;
+	while (sol[i])
+		free(sol[i++]);
+	free(sol);
+	if (!k)
+		return (NULL);
+	return (k);
+}
+
 /*
 char	*check_join(char *s)
 {
@@ -73,28 +87,47 @@ char	*join_bin(char *s)
 	return (sol);
 }
 */
+
+int	files_error(int i)
+{
+	if (i == 0)
+		perror("Can´t open infile");
+	else
+		perror("Can´t open outfile");
+	return (0);
+}
+
+void	zero_pid(int fd[2], int fd_in, char **args, char *const env[])
+{
+	close(fd[0]);
+	if (fd_in > 0)
+		dup2(fd_in, 0);
+	dup2(fd[1], 1);
+	execute_b(args[2], env);
+}
+
 int	main(int arg, char *args[], char *const env[])
 {
 	int		fd[2];
 	int		pid;
 	int		fd_in;
+	int		check;
 
 	if (arg != 5)
 		return (0);
 	pipe(fd);
+	check = 0;
 	fd_in = open(args[1], O_RDONLY);
 	if (fd_in < 0)
-		perror("Can`t open infile");
+		return (files_error(0));
 	pid = fork();
 	if (pid == 0)
-	{
-		close(fd[0]);
-		if (fd_in > 0)
-			dup2(fd_in, 0);
-		dup2(fd[1], 1);
-		execute_b(args[2], env);
-	}
+		zero_pid(fd, fd_in, args, env);
 	else
-		father(args, fd, env, fd_in);
+	{
+		check = father(args, fd, env, fd_in);
+		if (check == 0)
+			return (0);
+	}
 	return (0);
 }

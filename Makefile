@@ -6,8 +6,6 @@ NAME	=	pipex
 CC		=	gcc
 RM		=	rm -f
 CFLAGS	=	-Wall -Wextra -Werror 
-##.c.o:
-##	${CC} ${CFLAGS} -c ${SRCS}
 all:	${NAME}
 $(NAME):	${OBJS}
 	${CC} ${CFLAGS} -o ${NAME} ${OBJS}
